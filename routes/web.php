@@ -29,14 +29,18 @@ Route::group(['middleware' => ['web']], function() {
 	Route::post('/signin', [
 	        'uses' => 'UserController@postSingIn',
 	        'as' => 'signin'
-	]);
-
+	]);	
 	
+});
+
+Route::group(['middleware' => 'auth'], function() {
+
+	Route::Auth();
+
 	Route::get('/dashboard', [
 		'uses' => 'UserController@getDashboard',
 		'as' => 'dashboard',
 		'middleware' => 'auth',
 	]);
-	
-}
-);
+
+});
